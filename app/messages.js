@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     const messages = [];
     fs.readdir('./messages', (err, files) => {
         if(err) throw err;
-        files.reverse().forEach(file => messages.length < 5 && messages.push(JSON.parse(fs.readFileSync(`./messages/${file}`, 'UTF-8'))));
+        files.reverse().splice(0, 5).forEach(file => messages.push(JSON.parse(fs.readFileSync(`./messages/${file}`, 'UTF-8'))));
         res.send(messages);
     });
 });
